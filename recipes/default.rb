@@ -21,23 +21,18 @@ case node['platform']
 when 'ubuntu', 'debian'
 
   # step 1
-  execute "apt-get-update" do
-    command "apt-get update"
-    action :nothing
-  end
-
-  remote_file "/etc/apt/sources.list.d/newrelic.list" do
-    source "http://download.newrelic.com/debian/newrelic.list"
-    owner "root"
-    group "root"
-    mode 0640
-    notifies :run, "execute[apt-get-update]", :immediately
+  apt_repository "newrelic" do
+    uri "http://apt.newrelic.com/debian/"
+    distribution "newrelic"
+    components ["non-free"]
+    key_server "hkp://subkeys.pgp.net"
+    key "548C16BF"
+    action :add
   end
 
   # step 2
   package "newrelic-sysmond" do
     action :upgrade
-    options "--allow-unauthenticated"
   end
 
 when "redhat", "centos", "fedora"
