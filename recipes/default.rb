@@ -60,7 +60,7 @@ end
 
 # step 3
 execute "nrsysmond-config" do
-  command "nrsysmond-config --set license_key=#{node[:newrelic][:license_key]}"
+  command "nrsysmond-config --set license_key=#{node[:newrelic][:license_key]} ssl=true"
   action :run
 end
 
