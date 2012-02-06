@@ -25,7 +25,7 @@ when 'ubuntu', 'debian'
     uri "http://apt.newrelic.com/debian/"
     distribution "newrelic"
     components ["non-free"]
-    key_server "hkp://subkeys.pgp.net"
+    keyserver "hkp://subkeys.pgp.net"
     key "548C16BF"
     action :add
   end
